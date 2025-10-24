@@ -64,7 +64,7 @@ ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 
 # Build bob binary
 # Those RUSTFLAGS reduce binary size from 4MB to 600 KB
-RUN cd bob_the_builder && RUSTFLAGS='-C link-arg=-s' cargo build --release
+RUN cd bob_the_builder && RUSTFLAGS='-C link-arg=-s --cfg getrandom_backend="custom"' cargo build --release
 # Check bob binary
 RUN cd bob_the_builder && \
   ls -lh target/release/bob && \

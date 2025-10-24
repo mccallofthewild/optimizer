@@ -71,7 +71,10 @@ impl Build {
         // Run the build
         let mut child = Command::new(crate::CARGO_PATH)
             .args(&args)
-            .env("RUSTFLAGS", "-C link-arg=-s")
+            .env(
+                "RUSTFLAGS",
+                "--cfg getrandom_backend=\"custom\" -C link-arg=-s",
+            )
             .current_dir(fs::canonicalize(contract).unwrap())
             .spawn()
             .unwrap();
